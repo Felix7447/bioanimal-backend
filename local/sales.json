@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "cedula_cliente": 27764811,
+    "mascota_id": 1,
+    "tipoventa_id": 1,
+    "procedimiento_id": 1,
+    "fecha": "2023-12-30",
+    "ingreso": 20
+  },
+  {
+    "id": 2,
+    "cedula_cliente": 27764451,
+    "mascota_id": 1,
+    "tipoventa_id": 2,
+    "procedimiento_id": 1,
+    "fecha": "2023-12-30",
+    "ingreso": 25
+  },
+  {
+    "id": 3,
+    "cedula_cliente": 27482811,
+    "mascota_id": 3,
+    "tipoventa_id": 2,
+    "procedimiento_id": 2,
+    "fecha": "2023-12-31",
+    "ingreso": 40
+  }
+]

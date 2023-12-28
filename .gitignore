@@ -153,4 +153,5 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-build
+### TSC files
+bundle
