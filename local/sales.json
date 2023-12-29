@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "4948241e-6014-416f-bdab-5aa71dcc852e",
     "cedula_cliente": 27764811,
     "mascota_id": 1,
     "tipoventa_id": 1,
@@ -9,7 +9,7 @@
     "ingreso": 20
   },
   {
-    "id": 2,
+    "id": "ea1d5326-b191-489b-a83b-557c06e80d39",
     "cedula_cliente": 27764451,
     "mascota_id": 1,
     "tipoventa_id": 2,
@@ -18,7 +18,7 @@
     "ingreso": 25
   },
   {
-    "id": 3,
+    "id": "ef3cc051-ffc1-4e41-b6ab-6b0aa855eb76",
     "cedula_cliente": 27482811,
     "mascota_id": 3,
     "tipoventa_id": 2,

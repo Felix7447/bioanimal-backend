@@ -1,8 +1,8 @@
 import salesInfo from '../local/sales.json'
-import { type sale } from 'local/types'
+import { type Sale } from 'local/types'
 
 export default class SalesService {
-  sales: sale[]
+  sales: Sale[]
 
   constructor() {
     this.sales = salesInfo
