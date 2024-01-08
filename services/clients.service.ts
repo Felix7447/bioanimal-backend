@@ -1,8 +1,7 @@
 import { type RequestHandler } from 'express'
 import clientsInfo from '../local/clients.json'
 import { type Client } from 'local/types'
-import { AppDataSource } from '../data-source'
-import { Clients } from '../entity/Clients'
+import { ClientModel } from '../models/clients.model'
 
 export default class SalesService {
   clients: Client[]
@@ -12,12 +11,62 @@ export default class SalesService {
   }
 
   getAll: RequestHandler = async (_req, res) => {
-    const getClients = await AppDataSource.getRepository(Clients).find()
-    res.json(getClients)
+    try {
+      const getClients = await ClientModel.getAll()
+      res.json(getClients)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  getById(identifier: number) {
-    const rta = this.clients.find(({ cedula }) => cedula === identifier)
-    return rta
+  getById: RequestHandler = async (req, res) => {
+    try {
+      const id = parseInt(req.params.id)
+      const getClient = await ClientModel.getById({ id })
+      res.json(getClient)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  getByName: RequestHandler = async (req, res) => {
+    try {
+      const { name } = req.params
+      const getClientsByName = await ClientModel.getByName({ name })
+      res.json(getClientsByName)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  createNewClient: RequestHandler = async (req, res) => {
+    try {
+      const body = req.body
+      const newClient = await ClientModel.create({ body })
+      res.json(newClient)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  editClient: RequestHandler = async (req, res) => {
+    try {
+      const id = parseInt(req.params.id)
+      const body = req.body
+      const client = await ClientModel.update({ id, body })
+      res.json(client)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  deleteClient: RequestHandler = async (req, res) => {
+    try {
+      const id = parseInt(req.params.id)
+      const deletedClient = await ClientModel.deleteClient({ id })
+      res.json(deletedClient)
+    } catch (error) {
+      console.error(error)
+    }
   }
 }

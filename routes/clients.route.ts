@@ -7,11 +7,11 @@ export const clientsRouter = () => {
   const router = Router()
 
   router.get('/', services.getAll)
-
-  router.get('/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    res.json(services.getById(id))
-  })
+  router.get('/:id', services.getById)
+  router.get('/:name', services.getByName)
+  router.post('/', services.createNewClient)
+  router.patch('/:id', services.editClient)
+  router.delete('/:id', services.deleteClient)
 
   return router
 }

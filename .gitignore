@@ -161,3 +161,5 @@ docker-compose.yml
 
 ### Postgres
 pgdata
+
+api.http
