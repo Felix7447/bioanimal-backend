@@ -6,7 +6,7 @@ export class Pets {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column('varchar')
   nombre: string
 
   @Column({ type: 'varchar', length: 18 })

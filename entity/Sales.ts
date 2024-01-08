@@ -24,6 +24,6 @@ export class Sales {
   @Column({ type: 'timestamp without time zone', default: () => 'CURRENT_TIMESTAMP' })
   fecha: string
 
-  @Column()
+  @Column('int')
   ingreso: number
 }

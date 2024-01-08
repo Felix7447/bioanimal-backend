@@ -3,10 +3,10 @@ import { Pets } from './Pets'
 
 @Entity()
 export class Clients {
-  @PrimaryColumn()
+  @PrimaryColumn('int')
   cedula: number
 
-  @Column()
+  @Column('varchar')
   nombre: string
 
   @OneToMany(() => Pets, (pet) => pet.cliente)

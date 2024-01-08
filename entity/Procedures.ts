@@ -6,7 +6,7 @@ export class Procedures {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column('varchar')
   nombre: string
 
   @ManyToOne(() => SaleType)
