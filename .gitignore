@@ -160,4 +160,4 @@ bundle
 docker-compose.yml
 
 ### Postgres
-postgres_data
+pgdata

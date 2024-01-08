@@ -6,9 +6,7 @@ const services = new ClientsService()
 export const clientsRouter = () => {
   const router = Router()
 
-  router.get('/', (_req, res) => {
-    res.json(services.getAll())
-  })
+  router.get('/', services.getAll)
 
   router.get('/:id', (req, res) => {
     const id = parseInt(req.params.id)
