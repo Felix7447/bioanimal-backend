@@ -2,6 +2,8 @@ import { type RequestHandler } from 'express'
 import clientsInfo from '../local/clients.json'
 import { type Client } from 'local/types'
 import { ClientModel } from '../models/clients.model'
+import { createClientSchema, updateClientSchema } from '../schemas/clients.schema'
+import { type createBodyClient } from 'types'
 
 export default class SalesService {
   clients: Client[]
@@ -41,7 +43,14 @@ export default class SalesService {
 
   createNewClient: RequestHandler = async (req, res) => {
     try {
-      const body = req.body
+      const body: createBodyClient = req.body
+
+      const result = createClientSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+      }
+
       const newClient = await ClientModel.create({ body })
       res.json(newClient)
     } catch (error) {
@@ -52,7 +61,14 @@ export default class SalesService {
   editClient: RequestHandler = async (req, res) => {
     try {
       const id = parseInt(req.params.id)
-      const body = req.body
+      const body: createBodyClient = req.body
+
+      const result = updateClientSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+      }
+
       const client = await ClientModel.update({ id, body })
       res.json(client)
     } catch (error) {

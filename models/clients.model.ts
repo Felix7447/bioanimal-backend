@@ -1,3 +1,4 @@
+import { type createBodyClient } from '../types'
 import { AppDataSource } from '../data-source'
 import { Clients } from '../entity/Clients'
 
@@ -20,13 +21,6 @@ const getByName = async ({ name }: { name: string }) => {
     }
   })
   return client
-}
-
-interface createBodyClient {
-  cedula: number
-  nombre: string
-  telefono: string
-  primerContacto: string
 }
 
 const create = async ({ body }: { body: createBodyClient }) => {
