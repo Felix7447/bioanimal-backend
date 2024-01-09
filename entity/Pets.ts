@@ -18,6 +18,6 @@ export class Pets {
   @Column({ type: 'varchar', length: 18 })
   color: string
 
-  @ManyToOne(() => Clients, (client) => client.mascotas)
+  @ManyToOne(() => Clients, (client) => client.cedula, { eager: true })
   cliente: Clients
 }

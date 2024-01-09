@@ -1,5 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
-import { Pets } from './Pets'
+import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity()
 export class Clients {
@@ -8,9 +7,6 @@ export class Clients {
 
   @Column('varchar')
   nombre: string
-
-  @OneToMany(() => Pets, (pet) => pet.cliente)
-  mascotas: Pets[]
 
   @Column({ type: 'varchar', length: 20 })
   telefono: string
