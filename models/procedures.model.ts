@@ -27,7 +27,7 @@ const createProc = async ({ body }: { body: createBodyProc }) => {
     tipoventa
   } = body
 
-  const pet = await AppDataSource
+  const proc = await AppDataSource
     .createQueryBuilder()
     .insert()
     .into(Procedures)
@@ -37,11 +37,11 @@ const createProc = async ({ body }: { body: createBodyProc }) => {
     })
     .execute()
 
-  return pet
+  return proc
 }
 
 const editProc = async ({ id, body }: { id: number, body: createBodyProc }) => {
-  const pet = await AppDataSource
+  const proc = await AppDataSource
     .createQueryBuilder()
     .update(Procedures)
     .set({
@@ -51,18 +51,18 @@ const editProc = async ({ id, body }: { id: number, body: createBodyProc }) => {
     .where('id = :id', { id })
     .execute()
 
-  return pet
+  return proc
 }
 
 const deleteProc = async ({ id }: { id: number }) => {
-  const pet = await AppDataSource
+  const proc = await AppDataSource
     .createQueryBuilder()
     .delete()
     .from(Procedures)
     .where('id = :id', { id })
     .execute()
 
-  return pet
+  return proc
 }
 
 export const ProcedureModel = {

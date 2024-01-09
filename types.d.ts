@@ -17,3 +17,7 @@ export interface createBodyProc {
   nombre: string
   tipoventa: _QueryDeepPartialEntity<SaleType>
 }
+
+export interface createBodySaletype {
+  nombre: string
+}
