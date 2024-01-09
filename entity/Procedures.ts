@@ -9,6 +9,6 @@ export class Procedures {
   @Column('varchar')
   nombre: string
 
-  @ManyToOne(() => SaleType)
+  @ManyToOne(() => SaleType, { eager: true })
   tipoventa: SaleType
 }

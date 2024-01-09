@@ -6,14 +6,11 @@ const services = new ProcedureService()
 export const procedureRouter = () => {
   const router = Router()
 
-  router.get('/', (_req, res) => {
-    res.json(services.getAll())
-  })
-
-  router.get('/:id', (req, res) => {
-    const id = req.params.id
-    res.json(services.getById(id))
-  })
+  router.get('/', services.getAll)
+  router.get('/:id', services.getById)
+  router.post('/', services.createProc)
+  router.patch('/:id', services.editProc)
+  router.delete('/:id', services.deleteProc)
 
   return router
 }
