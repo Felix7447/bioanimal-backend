@@ -21,3 +21,11 @@ export interface createBodyProc {
 export interface createBodySaletype {
   nombre: string
 }
+
+export interface createBodySales {
+  cliente: _QueryDeepPartialEntity<Clients>
+  mascota: _QueryDeepPartialEntity<Pets>
+  tipoventa: _QueryDeepPartialEntity<SaleType>
+  procedimiento: _QueryDeepPartialEntity<Procedures>
+  ingreso: number
+}

@@ -8,6 +8,9 @@ export const salesRouter = () => {
 
   router.get('/', services.getAll)
   router.get('/:id', services.getById)
+  router.post('/', services.createSale)
+  router.patch('/:id', services.editSale)
+  router.delete('/:id', services.deleteSale)
 
   return router
 }

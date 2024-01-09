@@ -9,16 +9,16 @@ export class Sales {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @ManyToOne(() => Clients)
+  @ManyToOne(() => Clients, { eager: true })
   cliente: Clients
 
-  @ManyToOne(() => Pets)
+  @ManyToOne(() => Pets, { eager: true })
   mascota: Pets
 
-  @ManyToOne(() => SaleType)
+  @ManyToOne(() => SaleType, { eager: true })
   tipoventa: SaleType
 
-  @ManyToOne(() => Procedures)
+  @ManyToOne(() => Procedures, { eager: true })
   procedimiento: Procedures
 
   @Column({ type: 'timestamp without time zone', default: () => 'CURRENT_TIMESTAMP' })
