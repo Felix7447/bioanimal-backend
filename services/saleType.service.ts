@@ -2,6 +2,8 @@ import { type RequestHandler } from 'express'
 import saletypeInfo from '../local/saletype.json'
 import { type Saletype } from '../local/types'
 import { SaleTypeModel } from '../models/saleType.model'
+import { type createBodySaletype } from '../types'
+import { createSaletypeSchema } from '../schemas/saleType.schema'
 
 export default class SalesService {
   saleType: Saletype[]
@@ -41,7 +43,15 @@ export default class SalesService {
 
   createSaletype: RequestHandler = async (req, res) => {
     try {
-      const body = req.body
+      const body: createBodySaletype = req.body
+
+      const result = createSaletypeSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const createSaletype = await SaleTypeModel.createSaletype({ body })
       res.json(createSaletype)
     } catch (error) {
@@ -52,7 +62,15 @@ export default class SalesService {
   editSaletype: RequestHandler = async (req, res) => {
     try {
       const id = parseInt(req.params.id)
-      const body = req.body
+      const body: createBodySaletype = req.body
+
+      const result = createSaletypeSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const editSaletype = await SaleTypeModel.editSaletype({ id, body })
       res.json(editSaletype)
     } catch (error) {

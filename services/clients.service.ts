@@ -49,10 +49,11 @@ export default class SalesService {
 
       if (!result.success) {
         res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
       }
 
       const newClient = await ClientModel.create({ body })
-      res.json(newClient)
+      res.status(201).json(newClient)
     } catch (error) {
       console.error(error)
     }
@@ -67,10 +68,11 @@ export default class SalesService {
 
       if (!result.success) {
         res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
       }
 
       const client = await ClientModel.update({ id, body })
-      res.json(client)
+      res.status(200).json(client)
     } catch (error) {
       console.error(error)
     }
@@ -80,7 +82,7 @@ export default class SalesService {
     try {
       const id = parseInt(req.params.id)
       const deletedClient = await ClientModel.deleteClient({ id })
-      res.json(deletedClient)
+      res.status(200).json(deletedClient)
     } catch (error) {
       console.error(error)
     }

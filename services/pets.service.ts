@@ -2,6 +2,8 @@ import { type RequestHandler } from 'express'
 import petsInfo from '../local/pets.json'
 import { type Pet } from 'local/types'
 import { PetModel } from '../models/pets.model'
+import { type createBodyPets } from '../types'
+import { createPetSchema, updatePetSchema } from '../schemas/pets.schema'
 
 export default class SalesService {
   pets: Pet[]
@@ -41,20 +43,36 @@ export default class SalesService {
 
   createPet: RequestHandler = async (req, res) => {
     try {
-      const body = req.body
-      const pet = await PetModel.createPet({ body })
-      res.json(pet)
+      const body: createBodyPets = req.body
+
+      const result = createPetSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
+      const pet = await PetModel.createPet({ body: result.data })
+      res.status(200).json(pet)
     } catch (error) {
-      res.json(error)
+      console.error(error)
     }
   }
 
   editPet: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params
-      const body = req.body
+      const body: createBodyPets = req.body
+
+      const result = updatePetSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const pet = await PetModel.editPet({ id, body })
-      res.json(pet)
+      res.status(200).json(pet)
     } catch (error) {
       res.json(error)
     }
@@ -64,7 +82,7 @@ export default class SalesService {
     try {
       const { id } = req.params
       const pet = await PetModel.deletePet({ id })
-      res.json(pet)
+      res.status(200).json(pet)
     } catch (error) {
       res.json(error)
     }

@@ -2,6 +2,8 @@ import { type RequestHandler } from 'express'
 import salesInfo from '../local/sales.json'
 import { type Sale } from 'local/types'
 import { SalesModel } from '../models/sales.model'
+import { type createBodySales } from '../types'
+import { createSaleSchema } from 'schemas/sales.schema'
 
 export default class SalesService {
   sales: Sale[]
@@ -31,7 +33,15 @@ export default class SalesService {
 
   createSale: RequestHandler = async (req, res) => {
     try {
-      const body = req.body
+      const body: createBodySales = req.body
+
+      const result = createSaleSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const createSale = await SalesModel.createSale({ body })
       res.json(createSale)
     } catch (error) {
@@ -42,7 +52,14 @@ export default class SalesService {
   editSale: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params
-      const body = req.body
+      const body: createBodySales = req.body
+      const result = createSaleSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const sale = await SalesModel.editSale({ id, body })
       res.json(sale)
     } catch (error) {

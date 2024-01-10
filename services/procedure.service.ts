@@ -2,6 +2,8 @@ import { type RequestHandler } from 'express'
 import procedureInfo from '../local/procedure.json'
 import { type Procedure } from 'local/types'
 import { ProcedureModel } from '../models/procedures.model'
+import { type createBodyProc } from '../types'
+import { createProcSchema } from '../schemas/procedure.schema'
 
 export default class ProcedureService {
   procedure: Procedure[]
@@ -41,7 +43,15 @@ export default class ProcedureService {
 
   createProc: RequestHandler = async (req, res) => {
     try {
-      const body = req.body
+      const body: createBodyProc = req.body
+
+      const result = createProcSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const createProc = await ProcedureModel.createProc({ body })
       res.json(createProc)
     } catch (error) {
@@ -52,7 +62,15 @@ export default class ProcedureService {
   editProc: RequestHandler = async (req, res) => {
     try {
       const id = parseInt(req.params.id)
-      const body = req.body
+      const body: createBodyProc = req.body
+
+      const result = createProcSchema(body)
+
+      if (!result.success) {
+        res.status(400).json({ error: JSON.parse(result.error.message) })
+        return
+      }
+
       const editProc = await ProcedureModel.editProc({ id, body })
       res.json(editProc)
     } catch (error) {
