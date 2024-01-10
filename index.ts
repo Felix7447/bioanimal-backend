@@ -2,7 +2,12 @@ import express from 'express'
 import 'reflect-metadata'
 import 'dotenv/config'
 import { routerAPI } from './routes/index.route'
-import { AppDataSource } from './data-source'
+import { init } from './data-source'
+
+init()
+  .catch((error) => {
+    console.log(error)
+  })
 
 export const app = express()
 
@@ -15,16 +20,8 @@ app.get('/', (_req, res) => {
   res.send('Home')
 })
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Connected')
+routerAPI(app)
 
-    routerAPI(app)
-
-    app.listen(PORT, () => {
-      console.log(`Listening on http://localhost:${PORT}`)
-    })
-  })
-  .catch(error => {
-    console.log(error)
-  })
+export const server = app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`)
+})

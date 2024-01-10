@@ -14,3 +14,11 @@ export const AppDataSource = new DataSource({
     './entity/*.ts'
   ]
 })
+
+export const init = async () => {
+  try {
+    await AppDataSource.initialize()
+  } catch (error) {
+    console.error(error)
+  }
+}
